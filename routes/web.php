@@ -14,13 +14,8 @@ use App\Http\Controllers\CheckOutController;
 |
 */
 
-Route::get('/', function () {
-    $products = \App\Models\Product::get();
-    return view('home.index', compact('products'));
-});
-
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])->name("home");
 Route::post('/checkout/session', [CheckOutController::class, 'createCheckoutSession'])->name('product.checkout');
-
 Route::get('/checkout/success', [CheckOutController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/cancel', function () {
     return view('checkout.cancel');
