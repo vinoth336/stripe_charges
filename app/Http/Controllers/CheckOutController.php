@@ -60,7 +60,7 @@ class CheckOutController extends Controller
     {
         $this->setStripEnv();
         $orderReferenceId = $request->input('session_id');
-        $orderDetail = OrderDetail::find($orderReferenceId);
+        $orderDetail = OrderDetail::where("order_reference_id", $orderReferenceId)->first();
         $session = Session::retrieve($orderDetail->session_id);
 
         $paymentIntent = PaymentIntent::retrieve($session->payment_intent);
